@@ -29,24 +29,12 @@ if not status_ok then
   return
 end
 
--- Have packer have a display
-
--- packer.init {
---  display = {
---    open_fn = function()
---      return require("packer.util").float { border = "rounded" }
---    end,
---  },
---  git = {
---    clone_timeout = 300, -- Timeout, in seconds, for git clones
---  },
--- 
-
 return packer.startup(function(use)
 
     use { "wbthomason/packer.nvim", commit = "6afb67460283f0e990d35d229fd38fdc04063e0a" } -- Have packer manage itself
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
     use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons' } }
+    use { "nvim-treesitter/nvim-treesitter", commit = "8e763332b7bf7b3a426fd8707b7f5aa85823a5ac" }
 
     -- Comment with gcc
     use { "numToStr/Comment.nvim", commit = "97a188a98b5a3a6f9b1b850799ac078faa17ab67" }
@@ -70,6 +58,11 @@ return packer.startup(function(use)
     use { "neovim/nvim-lspconfig", commit = "f11fdff7e8b5b415e5ef1837bdcdd37ea6764dda" } -- enable LSP
     use { "williamboman/mason.nvim", commit = "c2002d7a6b5a72ba02388548cfaf420b864fbc12"}
     use { "williamboman/mason-lspconfig.nvim", commit = "0051870dd728f4988110a1b2d47f4a4510213e31" }
+
+    -- md notetaking
+    use {
+        "nvim-neorg/neorg",
+    }
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

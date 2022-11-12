@@ -8,6 +8,8 @@ require "user.cmp"
 require "user.lsp"
 require "user.keymaps"
 require "user.nvim-tree"
+require "user.treesitter"
+require "user.neorg"
 
 -- Set colorscheme
 local colorscheme = "PaperColor"
@@ -25,16 +27,24 @@ local set = vim.opt
 set.shiftwidth = 4
 set.tabstop = 4
 set.expandtab = true
+set.swapfile = false
+set.mouse = "a"
+vim.opt.clipboard = "unnamedplus"
+
 -- no wrapping
 set.wrap = false
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = {'*.md', '*.txt'},
+ -- group = group,
+  command = 'setlocal wrap'
+})
 
 set.number = true
 set.relativenumber = true
 -- Netrw settings
-vim.g.netrw_winsize= 10
-vim.g.netrw_banner = 0
-
-set.swapfile = false
+--vim.g.netrw_winsize= 10
+-- vim.g.netrw_banner = 0
 
 -- Autocomplete pairs no need for a plugin!!!
 vim.api.nvim_exec(
