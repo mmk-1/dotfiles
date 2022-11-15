@@ -8,6 +8,7 @@ require "user.cmp"
 require "user.lsp"
 require "user.keymaps"
 require "user.nvim-tree"
+require "user.treesitter"
 
 -- Set colorscheme
 local colorscheme = "PaperColor"
