@@ -67,6 +67,8 @@ call plug#end()
 
 
 " Colorscheme
+let g:gruvbox_italicize_strings = 0
+let g:gruvbox_bold = 0
 colorscheme gruvbox8
     " Remove transparency
     highlight Normal ctermbg=Black
