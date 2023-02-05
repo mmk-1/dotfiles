@@ -1,6 +1,8 @@
 " GENERAL
 syntax on
 set number
+set hlsearch
+set incsearch
 set relativenumber
 set noswapfile
 set mouse=a
@@ -27,22 +29,26 @@ set clipboard=unnamedplus
     " Block in other modes
     let &t_EI = "\<Esc>[2 q"
 
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+
 " KEYMAPPINGS
 let mapleader = " "
 
-" Colorscheme
-colorscheme slate
-    " Remove transparency
-    highlight Normal ctermbg=Black
-    highlight NonText ctermbg=Black
+" NERDTree stuff
+nmap <leader>e :NERDTreeToggle<CR>
+nmap <leader>ne :NERDTree<CR>
 
 
-
+set nocompatible
 " PLUGINS
 call plug#begin('~/.vim/autoload')
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-obsession'
+Plug 'lifepillar/vim-gruvbox8'
 call plug#end()
 
     " TMUX
@@ -58,3 +64,16 @@ call plug#end()
     nnoremap <C-n> :NERDTree<CR>
     nnoremap <leader>e :NERDTreeToggle<CR>
     nnoremap <C-f> :NERDTreeFind<CR>
+
+
+" Colorscheme
+let g:gruvbox_italicize_strings = 0
+" disable bold in terminal vim
+set t_md=
+colorscheme gruvbox8
+    " Remove transparency
+    highlight Normal ctermbg=Black
+    highlight NonText ctermbg=Black
+
+
+
