@@ -22,6 +22,9 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # Include hidden files
 
+# source
+plug "$HOME/.config/zsh/aliases.zsh"
+
 # Plugins!
 plug "zsh-users/zsh-autosuggestions"
 plug "zap-zsh/vim"
