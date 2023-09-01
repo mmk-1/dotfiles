@@ -20,3 +20,14 @@
 # Install Morgen
 # Install Dropbox
 # Install Zoom
+#
+#
+# GNOME stuff:
+#
+# Install Gnome Tweaks
+# Install Extension Manager
+#   - Appindicator
+#   - Blur my shell
+#   - Dash to dock
+#   - User themes -> Marble theme
+#
