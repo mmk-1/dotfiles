@@ -18,7 +18,7 @@
 # Install Obsidian (flatpak)
 # Install Edge (rpm file)
 # Install Morgen
-# Install Dropbox
+# Install Dropbox -> Fix: https://www.dropboxforum.com/t5/Create-upload-and-share/Audio-files-not-showing-on-Linux-Fedora-mounted-directory/m-p/702489#M72240
 # Install Zoom
 #
 #
