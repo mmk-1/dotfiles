@@ -1,20 +1,18 @@
-#!/bin/sh 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
+# Zap plugin manager
 [ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
 
-# History file
+# History
 HISTSIZE=1000000
 SAVEHIST=1000000
-HISTFILE=~/.cache/zsh/history/.zsh_history
+HISTFILE=~/.cache/zsh/.zsh_history
+setopt share_history 
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
 setopt appendhistory
 
 bindkey "^R" history-incremental-search-backward
+
 # Basic tab completion
 autoload -U compinit
 zstyle ':completion:*' menu select
@@ -22,19 +20,13 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots) # Include hidden files
 
-# source
-plug "$HOME/.config/zsh/aliases.zsh"
-
-# Plugins!
+# Plugins
 plug "zsh-users/zsh-autosuggestions"
-plug "zap-zsh/vim"
 plug "zsh-users/zsh-syntax-highlighting"
-plug "romkatv/powerlevel10k"
+plug "zsh-users/zsh-completions"
+plug "jeffreytse/zsh-vi-mode"
 
-# I don't actually know what this does
-# export PATH="$HOME/.local/bin":$PATH
+alias ls='ls --color'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ${ZDOTDIR}/.p10k.zsh ]] || source ${ZDOTDIR}/.p10k.zsh
-
-
+# Starship
+eval "$(starship init zsh)"
