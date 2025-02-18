@@ -1,0 +1,12 @@
+: 1737231308:0;rm .zshrc
+: 1737231314:0;cd .config/zsh
+: 1737231332:0;cd ..
+: 1737231335:0;ls -la
+: 1737231338:0;cat starship.toml
+: 1737231363:0;cd zsh
+: 1737231378:13;nvim .zshrc
+: 1737231406:0;eval "$(starship init zsh)"
+: 1737231409:0;clear
+: 1737231409:0;ls
+: 1737231419:2;nvim .zshenv
+: 1737231431:14;nvim .config/zsh/.zshrc
