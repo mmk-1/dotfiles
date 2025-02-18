@@ -1,12 +1,16 @@
 : 1737231308:0;rm .zshrc
-: 1737231314:0;cd .config/zsh
 : 1737231332:0;cd ..
 : 1737231335:0;ls -la
 : 1737231338:0;cat starship.toml
 : 1737231363:0;cd zsh
-: 1737231378:13;nvim .zshrc
 : 1737231406:0;eval "$(starship init zsh)"
-: 1737231409:0;clear
-: 1737231409:0;ls
-: 1737231419:2;nvim .zshenv
 : 1737231431:14;nvim .config/zsh/.zshrc
+: 1739895438:0;ls
+: 1739895444:6;pamac search starship
+: 1739895456:52;pamac install starship
+: 1739895573:0;clear
+: 1739895573:0;cd
+: 1739896424:0;cd .config/zsh
+: 1739896426:5;nvim .zshenv
+: 1739896466:6;nvim .zshrc_2025-01-18_1737231224
+: 1739896475:4;nvim .zshrc
