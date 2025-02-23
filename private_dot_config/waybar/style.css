@@ -55,14 +55,20 @@ tooltip {
     margin-bottom: 5px;
 }
 
-/* Left end of the bar*/
+
 #tray {
-    border-radius: 15px 0px 0px 15px;
+    border-radius: 15px;
     color: #DADAE8;
+    margin-right: 10px;
+}
+
+/* Left end of the bar*/
+#language {
+    border-radius: 15px 0px 0px 15px;
 }
 
 #network {
-    padding-left: 15px;
+    padding-left: 2px;
     padding-right: 2px;
     background: #332E41;
     border-radius: 0px;
