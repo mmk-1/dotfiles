@@ -1,9 +1,10 @@
 # autostart
 exec 			udiskie
 # exec 			gammastep
-exec nm-applet --indicator
+# exec nm-applet
 exec /usr/lib/polkit-kde-authentication-agent-1
 exec --no-startup-id /usr/lib/pam_kwallet_init
+exec swaync
 
 # style
 font 			            pango:monospace 16px 
@@ -94,8 +95,7 @@ set 	$term 	wezterm
 # on the original workspace that the command was run on.
 
 # Launch via Sway
-set $drun tofi-drun | xargs swaymsg exec --
-bindsym $mod+space exec $drun
+set $menu rofi -show drun
 
 ## Output configuration
 output     *   bg      $HOME/Pictures/karamazov-transformed.jpeg stretch
@@ -117,11 +117,12 @@ bindsym 	$mod+Return 	exec 	$term
 bindsym 	$mod+q 		    kill
 
 # start your launcher
-bindsym 	alt+space 	        exec 	$menu
+bindsym 	$mod+space 	        exec 	$menu
 # bindsym     $mod+Shift+space    exec    $HOME/bin/online-search.sh
 
 # dismiss notifications
-bindsym 	Control+space 	exec 	makoctl dismiss
+# bindsym 	Control+space 	exec 	makoctl dismiss -a
+bindsym 	Control+space 	exec 	swaync-client -t -s
 
 # screenshot with grim and swappy
 # COMMENTED
@@ -228,18 +229,12 @@ bindsym 	$mod+alt+$down 		resize shrink 	height 	20px
 bindsym 	$mod+alt+$right 	resize grow 	width 	20px
 
 ## Special keys
-# COMMENTED
-# bindsym --locked XF86AudioRaiseVolume   exec $HOME/bin/volume-up.sh
-# bindsym --locked XF86AudioLowerVolume   exec $HOME/bin/volume-down.sh
-# bindsym --locked XF86AudioMute          exec pactl set-sink-mute $(pactl list | rg 'Sink #' | sed 's/Sink #//') toggle
+bindsym --locked XF86AudioRaiseVolume   exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+bindsym --locked XF86AudioLowerVolume   exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym --locked XF86AudioMute          exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
 # bindsym --locked XF86MonBrightnessUp    exec light -A 10 && notify-send " Light" "Brightness: $(light)%" --hint="int:value:$(light)"
 # bindsym --locked XF86MonBrightnessDown  exec light -U 10 && notify-send " Light" "Brightness: $(light)%" --hint="int:value:$(light)"
-# bindsym --locked XF86AudioPlay          exec playerctl -p spotify play-pause
-# bindsym --locked XF86AudioNext          exec playerctl -p spotify next
-# bindsym --locked XF86AudioPrev          exec playerctl -p spotify previous
-# bindsym --locked $mod+d                 exec sh -c "notify-send -i $HOME/pictures/icons/dnd.png '  Do Not Disturb' 'Turning on Do Not Disturb Mode' && sleep 2 && makoctl set-mode do-not-disturb"
-# bindsym --locked $mod+Shift+d           exec sh -c "makoctl set-mode default && notify-send -i $HOME/pictures/icons/dnd.png '  Do Not Disturb' 'Do Not Disturb Mode disabled'"
-#
+
 # status Bar:
 bar {
     swaybar_command waybar
