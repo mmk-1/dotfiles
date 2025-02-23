@@ -1,0 +1,4 @@
+# Set the background image
+image=$HOME/Pictures/wallpaper.jpeg
+
+layout center
