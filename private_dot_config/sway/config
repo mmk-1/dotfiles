@@ -1,6 +1,6 @@
 # autostart
 exec 			udiskie
-#exec 			wlsunset
+# exec 			gammastep-indicator &
 exec /usr/lib/polkit-kde-authentication-agent-1
 exec --no-startup-id /usr/lib/pam_kwallet_init
 exec swaync
@@ -109,6 +109,22 @@ focus_follows_mouse 	yes
 # 	before-sleep 'swaylock -f'
 
 # key bindings
+bindsym $mod+Shift+p exec swaylock \
+                            --screenshots \
+                            --clock \
+                            --indicator \
+                            --indicator-radius 100 \
+                            --indicator-thickness 7 \
+                            --effect-blur 7x5 \
+                            --effect-vignette 0.5:0.5 \
+                            --ring-color bb00cc \
+                            --key-hl-color 880033 \
+                            --line-color 00000000 \
+                            --inside-color 00000088 \
+                            --separator-color 00000000 \
+                            --grace 2 \
+                            --fade-in 0.2
+
 # start a terminal
 bindsym 	$mod+Return 	exec 	$term
 
@@ -135,7 +151,7 @@ floating_modifier 		$mod 	normal
 bindsym 	$mod+r 		reload
 
 # exit sway
-bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec wlogout
 
 # Moving around:
 # Move your focus around
