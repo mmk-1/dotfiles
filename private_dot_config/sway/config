@@ -1,5 +1,6 @@
 # autostart
 exec 			udiskie
+# TEST
 # exec 			gammastep
 # exec nm-applet
 exec /usr/lib/polkit-kde-authentication-agent-1

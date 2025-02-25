@@ -9,6 +9,7 @@ configuration {
 	display-ssh:                " SSH";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
+    terminal:                   "wezterm";
 }
 
 /*****----- Global Properties -----*****/
