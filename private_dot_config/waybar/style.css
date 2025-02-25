@@ -48,7 +48,7 @@ tooltip {
 }
 
 /* Right section */
-#clock, #battery, #wireplumber, #workspaces, #language, #tray {
+#clock, #battery, #wireplumber, #workspaces, #language, #tray, #custom-wlsunset {
 	padding: 2px 10px;
     background: #332E41;
     margin-top: 5px;

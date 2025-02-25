@@ -5,6 +5,16 @@ Things to do:
 4- mange git initialization config user and email
 5- Find a way to ignore .zcompdump when adding
 
+packages:
+- fzf
+- fd
+- ripgrep
+- neovim
+- wezterm
+- starship
+- zsh plug
+- zellij
+- yazi
 
 # Sway setup
 - Sway
