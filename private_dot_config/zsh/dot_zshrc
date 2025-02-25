@@ -11,7 +11,6 @@ setopt hist_ignore_dups
 setopt hist_verify
 setopt appendhistory
 
-bindkey "^R" history-incremental-search-backward
 
 # Basic tab completion
 autoload -U compinit
@@ -31,4 +30,8 @@ alias ls='ls --color'
 # Starship
 eval "$(starship init zsh)"
 
-# Fzf stuff tbd
+# This is because zvm overrides ctrl+r of fzf-history-widget
+function zvm_after_init() {
+    source <(fzf --zsh)
+    bindkey '^R' fzf-history-widget
+}
