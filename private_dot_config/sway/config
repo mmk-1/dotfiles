@@ -19,9 +19,9 @@ gaps 			            right	2
 gaps 			            inner 	5
 
 # window decorations
-# class			        border	    background	text        indicator   child_border
+# class                 border      background  text        indicator   child_border
 client.focused          #A4B9EF     #332E41     #E5B4E2     #DADAE8     #A4B9EF
-client.focused_inactive #A4B9EF     #332E41     #E5B4E2     #DADAE8     #A4B9EF
+client.focused_inactive #575268     #332E41     #E5B4E2     #DADAE8     #575268
 client.unfocused        #A4B9EF     #1E1E28     #DADAE8     #DADAE8     #575268
 client.urgent           #A4B9EF     #575268     #EBDDAA     #DADAE8     #EBDDAA
 
@@ -143,6 +143,9 @@ bindsym 	$mod+$left 	focus 	left
 bindsym 	$mod+$down 	focus 	down
 bindsym 	$mod+$up 	focus 	up
 bindsym 	$mod+$right focus 	right
+bindsym 	$mod+ctrl+Right focus 	right
+bindsym 	$mod+ctrl+Left focus 	left
+
 
 # move the focused window with the same, but add Shift
 bindsym 	$mod+Shift+$left 	move 	left
@@ -195,14 +198,14 @@ bindsym 	$mod+s 		floating 	toggle
 bindsym 	$mod+Shift+s 	focus 		mode_toggle
 
 # move floating windows around
-bindsym 	$mod+Up 		    move 	up 	    1
-bindsym 	$mod+Shift+Up 	    move 	up 	    10
-bindsym 	$mod+Left 		    move 	left 	1
-bindsym 	$mod+Shift+Left     move 	left 	10
-bindsym 	$mod+Right 		    move 	right 	1
-bindsym 	$mod+Shift+Right    move 	right 	10
-bindsym 	$mod+Down 		    move 	down 	1
-bindsym 	$mod+Shift+Down 	move 	down 	10
+# bindsym 	$mod+Up 		    move 	up 	    1
+# bindsym 	$mod+Shift+Up 	    move 	up 	    10
+# bindsym 	$mod+Left 		    move 	left 	1
+# bindsym 	$mod+Shift+Left     move 	left 	10
+# bindsym 	$mod+Right 		    move 	right 	1
+# bindsym 	$mod+Shift+Right    move 	right 	10
+# bindsym 	$mod+Down 		    move 	down 	1
+# bindsym 	$mod+Shift+Down 	move 	down 	10
 
 # move focus to the parent window
 bindsym 	$mod+a 		focus 	parent
@@ -218,10 +221,11 @@ bindsym 	$mod+Shift+minus 	move 	scratchpad
 bindsym 	$mod+minus 		scratchpad 	show
 
 # resizing windows
-bindsym 	$mod+alt+$left 		resize shrink 	width 	20px
-bindsym 	$mod+alt+$up 		resize grow 	height 	20px
-bindsym 	$mod+alt+$down 		resize shrink 	height 	20px
-bindsym 	$mod+alt+$right 	resize grow 	width 	20px
+# Need to be rebinded since mod is alt now
+# bindsym 	$mod+alt+$left 		resize shrink 	width 	20px
+# bindsym 	$mod+alt+$up 		resize grow 	height 	20px
+# bindsym 	$mod+alt+$down 		resize shrink 	height 	20px
+# bindsym 	$mod+alt+$right 	resize grow 	width 	20px
 
 # brightness and volume control
 bindsym --locked XF86AudioRaiseVolume   exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
@@ -235,5 +239,7 @@ bar {
     swaybar_command waybar
 }
 
+# hide or unhide waybar
+bindsym $mod+o exec killall -SIGUSR1 waybar
 
 include /etc/sway/config.d/*
