@@ -6,18 +6,28 @@ Things to do:
 5- Find a way to ignore .zcompdump when adding
 6- Add the `.conf` files for electron apps! (flags)
 
-packages:
+# Main packages
 - fzf
 - fd
 - ripgrep
 - neovim
 - wezterm
 - starship
-- zsh plug
+- zsh zap
 - zellij
+- kitty
+- Obsidian
+- Koofr (for syncing)
+- nvm
+
+# Flags configs
+- `chrome-flags.conf`
+- `chromium-flags.conf`
+- `electron-flags.conf`
+- `vivaldi-stable.conf`
+**Note:** we need to check what to do with Slack electron app for auth!
 
 # Hyprland
-
 For hyprland follow this guide on [github](https://github.com/gaurav23b/simple-hyprland/tree/main?tab=readme-ov-file)
 I did not do any scripting for the prerequisites because I am on Manjaro. (Might need later!)
 
@@ -40,6 +50,8 @@ I did not do any scripting for the prerequisites because I am on Manjaro. (Might
 - `wlogout`
 - `grim`
 - `cliphist`
+- `wlsunset`
+- `wl-clipboard`
 #### For theming stuff (which should be looked into later since its a mess rn):
 - `nwg-look`
 - `qt5ct`
@@ -47,4 +59,6 @@ I did not do any scripting for the prerequisites because I am on Manjaro. (Might
 - `kvantum`
 - `kvantum-theme-catppuccin-git`
 - `nwg-look`
-- 
+
+
+
