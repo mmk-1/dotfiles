@@ -1,0 +1,7 @@
+[user]
+	email = mmk1776@gmail.com
+	name = Mahdi Khosravi
+
+; This is necessary for older nodejs versions!
+[url "https://"]
+    insteadOf = git://
