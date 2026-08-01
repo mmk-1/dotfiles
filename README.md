@@ -1,10 +1,12 @@
-Things to do:
-1- Automate ZSH Zap installation
-2- Automate ~/.cache/zsh dir creation
-3- Manage passwords and ssh with bw cli
-4- mange git initialization config user and email
-5- Find a way to ignore .zcompdump when adding
-6- Add the `.conf` files for electron apps! (flags)
+# TODO List
+
+1- Automate ZSH Zap installation  
+2- Automate ~/.cache/zsh dir creation  
+3- Manage passwords and ssh with bw cli  
+4- mange git initialization config user and email  
+~~5- Find a way to ignore .zcompdump when adding ~~
+~~6- Add the `.conf` files for electron apps! (flags)~~  
+7- Add ssh configs, keys, secrets, etc.
 
 # Main packages
 - fzf
