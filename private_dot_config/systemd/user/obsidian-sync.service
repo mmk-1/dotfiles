@@ -1,0 +1,12 @@
+[Unit]
+Description=Obsidian Rclone Sync Watcher
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/bin/obsidian-sync.sh
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

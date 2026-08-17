@@ -1,0 +1,18 @@
+Host morpheus
+  HostName morpheus.cs.bilkent.edu.tr
+  User mahdi
+  IdentityFile ~/.ssh/id_ed25519_morpheus
+  ControlMaster auto
+  LocalForward 6661 localhost:6661
+  ControlPath ~/.ssh/cm-%r@%h:%p
+  ControlPersist 60m
+
+Host aur.archlinux.org
+  IdentityFile ~/.ssh/aur
+  User aur
+
+Host wallabag-server
+  HostName 77.90.6.52
+  User root
+  IdentityFile ~/.ssh/id_ed25519_hostbrr
+  IdentitiesOnly yes
