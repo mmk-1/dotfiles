@@ -1,3 +1,24 @@
+/* Carbonfox — EdenEast/nightfox.nvim
+ * https://github.com/EdenEast/nightfox.nvim/blob/main/lua/nightfox/palette/carbonfox.lua
+ */
+@define-color cf-bg       #161616;
+@define-color cf-bg0      #0c0c0c;
+@define-color cf-chip     #252525;
+@define-color cf-sel      #2a2a2a;
+@define-color cf-fg       #f2f4f8;
+@define-color cf-fg-dim   #6e6f70;
+@define-color cf-black    #282828;
+@define-color cf-red      #ee5396;
+@define-color cf-green    #25be6a;
+@define-color cf-yellow   #08bdba; /* carbonfox “yellow” = teal */
+@define-color cf-blue     #78a9ff;
+@define-color cf-magenta  #be95ff;
+@define-color cf-cyan     #33b1ff;
+@define-color cf-white    #dfdfe0;
+@define-color cf-orange   #3ddbd9; /* carbonfox “orange” = bright teal */
+@define-color cf-pink     #ff7eb6;
+@define-color cf-comment  #6e6f70;
+
 * {
     border: none;
     border-radius: 0;
@@ -8,39 +29,39 @@
 }
 
 window#waybar {
-    background: rgba(21, 18, 27, 0);
-    color: #cdd6f4;
+    background: transparent;
+    color: @cf-fg;
 }
 
 #workspaces button {
     padding: 5px;
-    color: #555869;
+    color: @cf-fg-dim;
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: @cf-fg;
 }
 
 #workspaces button.focused {
-    color: #a6adc8;
-    background: #eba0ac;
+    color: @cf-bg;
+    background: @cf-pink;
     border-radius: 10px;
 }
 
 #workspaces button.urgent {
-    color: #11111b;
-    background: #a6e3a1;
+    color: @cf-bg;
+    background: @cf-red;
     border-radius: 10px;
 }
 
 #workspaces button:hover {
-    background: #cdd6f4;
-    color: #11111b;
+    background: @cf-sel;
+    color: @cf-fg;
     border-radius: 10px;
 }
 
-/* Shared chip chrome — colors set per module below */
+/* Shared chip chrome */
 #window,
 #clock,
 #battery,
@@ -51,7 +72,7 @@ window#waybar {
 #workspaces,
 #tray,
 #backlight {
-    background: #1e1e2e;
+    background: @cf-chip;
     padding: 0px 10px;
     margin: 3px 0px;
     margin-top: 5px;
@@ -63,7 +84,6 @@ window#waybar {
 }
 
 #workspaces {
-    background: #1e1e2e;
     border-radius: 10px;
     margin-left: 10px;
     padding-right: 0px;
@@ -71,66 +91,66 @@ window#waybar {
 }
 
 #clock {
-    color: #f5e0dc; /* rosewater — bright on dark */
+    color: @cf-orange; /* teal — contrasts with calendar red */
     border-radius: 10px;
     margin-left: 5px;
 }
 
 #window {
-    color: #cdd6f4; /* text */
+    color: @cf-white;
     border-radius: 10px;
     margin-left: 60px;
     margin-right: 60px;
 }
 
 #memory {
-    color: #fab387; /* peach */
+    color: @cf-orange;
     border-radius: 10px 0px 0px 10px;
 }
 
 #cpu {
-    color: #f9e2af; /* yellow */
+    color: @cf-yellow;
     border-radius: 0px 10px 10px 0px;
     margin-right: 10px;
 }
 
 #network {
-    color: #94e2d5; /* teal — bright */
+    color: @cf-cyan;
     border-radius: 10px 0px 0px 10px;
 }
 
 #battery {
-    color: #f5c2e7; /* pink */
+    color: @cf-pink;
     border-radius: 0px 10px 10px 0px;
     margin-right: 10px;
 }
 
 #battery.warning {
-    color: #f9e2af; /* yellow */
+    color: @cf-magenta;
 }
 
 #battery.critical {
-    color: #f38ba8; /* red */
+    color: @cf-red;
 }
 
 #battery.charging,
 #battery.plugged {
-    color: #a6e3a1; /* bright green only when charging */
+    color: @cf-green;
 }
 
 #backlight {
-    color: #f9e2af; /* yellow */
+    color: @cf-orange;
     border-radius: 10px 0px 0px 10px;
 }
 
 #wireplumber {
-    color: #fab387; /* peach */
+    color: @cf-pink;
     border-left: 0px;
     border-right: 0px;
 }
 
 #wireplumber.microphone {
-    color: #f38ba8; /* red/pink */
+    color: @cf-red;
     border-radius: 0px 10px 10px 0px;
     border-left: 0px;
     border-right: 0px;
@@ -139,5 +159,5 @@ window#waybar {
 
 #wireplumber.muted,
 #wireplumber.microphone.muted {
-    color: #6c7086; /* overlay */
+    color: @cf-comment;
 }
