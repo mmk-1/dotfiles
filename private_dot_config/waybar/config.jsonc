@@ -18,8 +18,8 @@
         "network",
         "battery",
         "backlight",
-        "pulseaudio",
-        "pulseaudio#microphone"
+        "wireplumber",
+        "wireplumber#microphone"
     ],
 
     "hyprland/window": {
@@ -49,16 +49,15 @@
             "on-scroll": 1,
             "on-click-right": "mode",
             "format": {
-                "months": "<span color='#a6adc8'><b>{}</b></span>",
-                "weekdays": "<span color='#a6adc8'><b>{}</b></span>",
-                "today": "<span color='#a6adc8'><b>{}</b></span>",
-                "days": "<span color='#555869'><b>{}</b></span>"
+                "months": "<span color='#f5e0dc'><b>{}</b></span>",
+                "weekdays": "<span color='#fab387'><b>{}</b></span>",
+                "today": "<span color='#f9e2af'><b>{}</b></span>",
+                "days": "<span color='#a6adc8'><b>{}</b></span>"
             }
         }
     },
 
     "backlight": {
-        "device": "intel_backlight",
         "format": "{icon} {percent}%",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-scroll-up": "brightnessctl set 1%+",
@@ -79,33 +78,24 @@
         "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
 
-    "pulseaudio": {
+    "wireplumber": {
         "format": "{icon}  {volume}%",
-        "tooltip": false,
         "format-muted": "  Muted",
-        "on-click": "pamixer -t",
-        "on-scroll-up": "pamixer -i 1",
-        "on-scroll-down": "pamixer -d 1",
+        "tooltip": false,
+        "max-volume": 100,
         "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["","", "", ""]
-        }
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "format-icons": ["", "", ""]
     },
 
-    "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "format-source": " {volume}%",
-        "format-source-muted": "  Muted",
-        "on-click": "pamixer --default-source -t",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
+    "wireplumber#microphone": {
+        "node-type": "Audio/Source",
+        "format": " {volume}%",
+        "format-muted": "  Muted",
+        "tooltip": false,
+        "max-volume": 100,
+        "scroll-step": 5,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
     },
 
     "memory": {

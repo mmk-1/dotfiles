@@ -1,66 +1,109 @@
-# TODO List
+# Dotfiles
 
-1- Automate ZSH Zap installation  
-2- Automate ~/.cache/zsh dir creation  
-3- Manage passwords and ssh with bw cli  
-4- mange git initialization config user and email  
-~~5- Find a way to ignore .zcompdump when adding ~~
-~~6- Add the `.conf` files for electron apps! (flags)~~  
-7- Add ssh configs, keys, secrets, etc.
+Personal Arch/Hyprland dotfiles (chezmoi).
 
-# Main packages
-- fzf
-- fd
-- ripgrep
-- neovim
-- wezterm
-- starship
-- zsh zap
-- zellij
-- kitty
-- Obsidian
-- Koofr (for syncing)
-- nvm
+## Index
 
-# Flags configs
-- `chrome-flags.conf`
-- `chromium-flags.conf`
-- `electron-flags.conf`
-- `vivaldi-stable.conf`
-**Note:** we need to check what to do with Slack electron app for auth!
+- [Packages](#packages)
+- [Terminal & shell setup](#terminal--shell-setup)
+- [Waybar setup](#waybar-setup)
 
-# Hyprland
-For hyprland follow this guide on [github](https://github.com/gaurav23b/simple-hyprland/tree/main?tab=readme-ov-file)
-I did not do any scripting for the prerequisites because I am on Manjaro. (Might need later!)
+---
 
-### Relevant packages on pamac:
-- `hyprland`
-- `xdg-desktop-portal-hyprland`
-- `polkit-kde-agent`
-- `qt5-wayland`
-- `qt6-wayland`
-- `dunst`
-- `brightnessctl`
-- `pamixer`
-- `waybar`
-- `tofi`
-- `cliphist`
-- `swww`
-- `hyprpicker`
-- `hyprlock`
-- `hypridle`
-- `wlogout`
-- `grim`
-- `cliphist`
-- `wlsunset`
-- `wl-clipboard`
-#### For theming stuff (which should be looked into later since its a mess rn):
-- `nwg-look`
-- `qt5ct`
-- `qt6ct `
-- `kvantum`
-- `kvantum-theme-catppuccin-git`
-- `nwg-look`
+## Packages
+
+### Core / CLI
+
+- `fzf`, `fd`, `ripgrep`
+- `neovim`
+- `zsh` (+ [Zap](https://github.com/zap-zsh/zap))
+- `starship`
+- `zellij`
+- `kitty`, `wezterm`
+- `nvm`
+- `Obsidian`, `Koofr`
+
+### Hyprland
+
+- `hyprland`, `xdg-desktop-portal-hyprland`
+- `hyprpolkitagent`, `hyprlock`, `hypridle`, `hyprpicker`
+- `waybar`, `swaybg` / `swww`, `dunst`, `wlogout`
+- `tofi`, `cliphist`, `wl-clipboard`
+- `brightnessctl`, `grim`
+- `qt5-wayland`, `qt6-wayland`
+- theming (later): `nwg-look`, `qt5ct`, `qt6ct`, `kvantum`
 
 
+
+### Fonts
+
+- `ttf-jetbrains-mono-nerd`
+
+
+
+### Electron flags
+
+- `chrome-flags.conf`, `chromium-flags.conf`, `electron-flags.conf`, `vivaldi-stable.conf`
+- Slack auth flags still TBD
+
+---
+
+
+
+## Terminal & shell setup
+
+Order matters: font → packages → shell → configs → terminal → mux.
+
+```bash
+# 1. Font (needed for starship / kitty icons)
+yay -S ttf-jetbrains-mono-nerd
+
+# 2. Packages
+yay -S zsh
+yay -S kitty
+yay -S starship
+yay -S zellij
+yay -S fzf
+yay -S direnv
+
+# 3. Default shell
+chsh -s /bin/zsh
+
+# 4. Apply configs (chezmoi — only this stack)
+chezmoi apply ~/.zshenv ~/.config/zsh
+chezmoi apply ~/.config/starship.toml
+chezmoi apply ~/.config/kitty
+chezmoi apply ~/.config/zellij
+
+# 5. Smoke-test shell (TTY or: zsh -l)
+#    Zap clones itself on first run from ~/.config/zsh/.zshrc
+
+# 6. Open Kitty — check Nerd glyphs + prompt
+
+# 7. Optional: zellij
+```
+
+---
+
+
+
+## Waybar setup
+
+Order: font → packages → config → run (Hyprland autostarts it).
+
+```bash
+# 1. Font (icons)
+yay -S ttf-jetbrains-mono-nerd
+
+# 2. Packages (audio via PipeWire/wpctl — already from wireplumber)
+yay -S waybar
+yay -S brightnessctl
+
+# 3. Apply config
+chezmoi apply ~/.config/waybar
+
+# 4. Run / reload
+waybar
+# or: killall waybar; waybar
+```
 

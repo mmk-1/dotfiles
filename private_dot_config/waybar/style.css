@@ -36,14 +36,15 @@ window#waybar {
 
 #workspaces button:hover {
     background: #cdd6f4;
-    color: #11111b; 
+    color: #11111b;
     border-radius: 10px;
 }
 
+/* Shared chip chrome — colors set per module below */
 #window,
 #clock,
 #battery,
-#pulseaudio,
+#wireplumber,
 #network,
 #cpu,
 #memory,
@@ -54,11 +55,6 @@ window#waybar {
     padding: 0px 10px;
     margin: 3px 0px;
     margin-top: 5px;
-    /* border: 1px solid #181825; */
-}
-
-#backlight {
-    border-radius: 10px 0px 0px 10px;
 }
 
 #tray {
@@ -74,50 +70,74 @@ window#waybar {
     padding-left: 5px;
 }
 
-#cpu {
-    border-radius: 0px 10px 10px 0px;
-    margin-right: 10px;
-}
-
-#memory {
-    border-radius: 10px 0px 0px 10px;
+#clock {
+    color: #f5e0dc; /* rosewater — bright on dark */
+    border-radius: 10px;
+    margin-left: 5px;
 }
 
 #window {
+    color: #cdd6f4; /* text */
     border-radius: 10px;
     margin-left: 60px;
     margin-right: 60px;
 }
 
-#clock {
-    color: #a6adc8;
-    border-radius: 10px 10px 10px 10px;
-    margin-left: 5px;
-    border-right: 0px;
+#memory {
+    color: #fab387; /* peach */
+    border-radius: 10px 0px 0px 10px;
+}
+
+#cpu {
+    color: #f9e2af; /* yellow */
+    border-radius: 0px 10px 10px 0px;
+    margin-right: 10px;
 }
 
 #network {
-    color:  #a6adc8;
+    color: #94e2d5; /* teal — bright */
     border-radius: 10px 0px 0px 10px;
-
 }
 
-#pulseaudio {
-    color: #a6adc8;
+#battery {
+    color: #f5c2e7; /* pink */
+    border-radius: 0px 10px 10px 0px;
+    margin-right: 10px;
+}
+
+#battery.warning {
+    color: #f9e2af; /* yellow */
+}
+
+#battery.critical {
+    color: #f38ba8; /* red */
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #a6e3a1; /* bright green only when charging */
+}
+
+#backlight {
+    color: #f9e2af; /* yellow */
+    border-radius: 10px 0px 0px 10px;
+}
+
+#wireplumber {
+    color: #fab387; /* peach */
     border-left: 0px;
     border-right: 0px;
 }
 
-#pulseaudio.microphone {
-    color: #a6adc8;
+#wireplumber.microphone {
+    color: #f38ba8; /* red/pink */
     border-radius: 0px 10px 10px 0px;
     border-left: 0px;
     border-right: 0px;
     margin-right: 5px;
 }
 
-#battery {
-    color:#a6adc8;
-    border-radius: 0px 10px 10px 0px;
-    margin-right: 10px;
+#wireplumber.muted,
+#wireplumber.microphone.muted {
+    color: #6c7086; /* overlay */
 }
