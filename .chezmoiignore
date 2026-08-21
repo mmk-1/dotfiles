@@ -1,5 +1,5 @@
-**/**/.zcompdump
 README.md
-private_dot_config/zsh/dot_zcompdump
-
-
+**/.zcompdump
+**/.zcompdump-*
+**/dot_zcompdump
+**/.zcompcache/
