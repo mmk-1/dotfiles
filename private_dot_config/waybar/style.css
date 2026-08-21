@@ -71,7 +71,8 @@ window#waybar {
 #memory,
 #workspaces,
 #tray,
-#backlight {
+#backlight,
+#custom-notification {
     background: @cf-chip;
     padding: 0px 10px;
     margin: 3px 0px;
@@ -138,9 +139,15 @@ window#waybar {
     color: @cf-green;
 }
 
+#custom-notification {
+    color: @cf-fg;
+    border-radius: 10px 0px 0px 10px;
+}
+
 #backlight {
     color: @cf-orange;
-    border-radius: 10px 0px 0px 10px;
+    border-left: 0px;
+    border-right: 0px;
 }
 
 #wireplumber {
