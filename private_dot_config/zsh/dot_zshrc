@@ -1,59 +1,62 @@
-# Zap plugin manager
-[ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
+# Bootstrap — Zap plugin manager
+ZAP_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zap"
+if [[ ! -f "$ZAP_DIR/zap.zsh" ]]; then
+  git clone --depth 1 --branch release-v1 \
+    https://github.com/zap-zsh/zap.git "$ZAP_DIR"
+fi
+source "$ZAP_DIR/zap.zsh"
 
-# History
+# Options
 HISTSIZE=1000000
 SAVEHIST=1000000
 HISTFILE=~/.cache/zsh/.zsh_history
-setopt share_history 
+setopt share_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_verify
 setopt appendhistory
+WORDCHARS='*?_[]~=&;!#$%^(){}<>'
 
-
-# Basic tab completion
+# Completion (zsh-completions must be on fpath before compinit)
+plug "zsh-users/zsh-completions"
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
-_comp_options+=(globdots) # Include hidden files
+_comp_options+=(globdots)
 
 # Plugins
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
-plug "zsh-users/zsh-completions"
+
+function zvm_config() {
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
 plug "jeffreytse/zsh-vi-mode"
 
-alias ls='ls --color'
-alias ssh="kitty +kitten ssh"
-
-# Starship
-eval "$(starship init zsh)"
-
-# This is because zvm overrides ctrl+r of fzf-history-widget
 function zvm_after_init() {
-    source <(fzf --zsh)
-    bindkey '^R' fzf-history-widget
+  source <(fzf --zsh)
+  zvm_bindkey viins '^R' fzf-history-widget
+  zvm_bindkey vicmd '^R' fzf-history-widget
 }
 
-alias v='nvim'
-
+# Prompt & Tools
+eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
 
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-# Unalias if previously set
-unalias ssh 2>/dev/null
+# Aliases
+alias ls='ls --color'
+alias v='nvim'
 
+# Functions
 ssh() {
-    if [ -n "$ZELLIJ" ]; then
-        command ssh "$@"
-    else
-        kitty +kitten ssh "$@"
-    fi
+  if [ -n "$ZELLIJ" ]; then
+    command ssh "$@"
+  else
+    kitty +kitten ssh "$@"
+  fi
 }
-
-# direnv hook
-eval "$(direnv hook zsh)"
