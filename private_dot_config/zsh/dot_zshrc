@@ -1,67 +1,98 @@
-# Bootstrap — Zap plugin manager
-ZAP_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zap"
-if [[ ! -f "$ZAP_DIR/zap.zsh" ]]; then
-  git clone --depth 1 --branch release-v1 \
-    https://github.com/zap-zsh/zap.git "$ZAP_DIR"
-fi
-source "$ZAP_DIR/zap.zsh"
+# -----------------------------
+# Environment & Paths
+# -----------------------------
+export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+[[ -d "$ZSH_CACHE_DIR" ]] || mkdir -p "$ZSH_CACHE_DIR"
 
-# Options
-ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
-mkdir -p "$ZSH_CACHE_DIR"
+export HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
+export HISTSIZE=1000000
+export SAVEHIST=1000000
 
-HISTSIZE=1000000
-SAVEHIST=1000000
-HISTFILE="$ZSH_CACHE_DIR/.zsh_history"
+# FZF feeders: fd ignores hidden files, hidden dirs, and .gitignore by default
+export FZF_DEFAULT_COMMAND="fd --strip-cwd-prefix"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type directory --strip-cwd-prefix"
+
+# -----------------------------
+# Shell Options
+# -----------------------------
 setopt share_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_verify
-setopt appendhistory
+setopt append_history
 WORDCHARS='*?_[]~=&;!#$%^(){}<>'
 
-# Completion (zsh-completions must be on fpath before compinit)
+# -----------------------------
+# Bootstrap Zap Plugin Manager
+# -----------------------------
+ZAP_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/zap"
+if [[ ! -f "$ZAP_DIR/zap.zsh" ]]; then
+  git clone --depth 1 --branch release-v1 https://github.com/zap-zsh/zap.git "$ZAP_DIR"
+fi
+source "$ZAP_DIR/zap.zsh"
+
+# -----------------------------
+# Completions
+# -----------------------------
 plug "zsh-users/zsh-completions"
+
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit -d "$ZSH_CACHE_DIR/.zcompdump"
 _comp_options+=(globdots)
 
-# Plugins
-plug "zsh-users/zsh-autosuggestions"
-plug "zsh-users/zsh-syntax-highlighting"
+# Rebuild completion dump once every 24 hours
+if [[ -n "$ZSH_CACHE_DIR/.zcompdump"(#qN.m+1) ]]; then
+  compinit -d "$ZSH_CACHE_DIR/.zcompdump"
+else
+  compinit -C -d "$ZSH_CACHE_DIR/.zcompdump"
+fi
 
+# -----------------------------
+# Plugins & Keymaps
+# -----------------------------
 function zvm_config() {
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
 }
-plug "jeffreytse/zsh-vi-mode"
 
 function zvm_after_init() {
   if command -v fzf >/dev/null; then
-    source <(fzf --zsh)
     zvm_bindkey viins '^R' fzf-history-widget
     zvm_bindkey vicmd '^R' fzf-history-widget
+    zvm_bindkey viins '^T' fzf-file-widget
+    zvm_bindkey vicmd '^T' fzf-file-widget
   fi
 }
 
-# Prompt & Tools
+plug "jeffreytse/zsh-vi-mode"
+plug "zsh-users/zsh-autosuggestions"
+# Syntax highlighting must be loaded last
+plug "zsh-users/zsh-syntax-highlighting"
+
+# -----------------------------
+# CLI Integrations
+# -----------------------------
 command -v starship >/dev/null && eval "$(starship init zsh)"
 command -v direnv >/dev/null && eval "$(direnv hook zsh)"
+command -v fzf >/dev/null && source <(fzf --zsh)
 
+# Lazy-load NVM to keep startup instantaneous
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  nvm() {
+    unset -f nvm node npm npx
+    \. "$NVM_DIR/nvm.sh"
+    [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
+    nvm "$@"
+  }
+  node() { nvm use default &>/dev/null; node "$@"; }
+  npm()  { nvm use default &>/dev/null; npm "$@"; }
+  npx()  { nvm use default &>/dev/null; npx "$@"; }
+fi
 
+# -----------------------------
 # Aliases
-alias ls='ls --color'
+# -----------------------------
+alias ls='ls --color=auto'
 alias v='nvim'
-
-# Functions
-ssh() {
-  if [ -n "$ZELLIJ" ]; then
-    command ssh "$@"
-  else
-    kitty +kitten ssh "$@"
-  fi
-}
