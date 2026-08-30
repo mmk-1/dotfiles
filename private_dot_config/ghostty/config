@@ -1,8 +1,8 @@
 font-family = JetBrainsMono Nerd Font
-font-size = 16
+font-size = 15
 theme = Carbonfox
 
-background-opacity = 0.95
+background-opacity = 1
 
 window-width = 100
 window-height = 30
