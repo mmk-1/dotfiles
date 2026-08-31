@@ -58,6 +58,9 @@ input {
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     // focus-follows-mouse max-scroll-amount="0%"
+
+    // Re-focusing the current workspace switches back to the previous one.
+    workspace-auto-back-and-forth
 }
 
 // You can configure outputs by their name, which you can find
@@ -150,7 +153,7 @@ layout {
         // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 4
+        width 2
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -260,6 +263,13 @@ layout {
 
 spawn-at-startup "noctalia"
 
+// Persistent named workspace for scratch tools (stays even when empty).
+workspace "scratch" {
+    layout {
+        default-column-width { proportion 1.0; }
+    }
+}
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -344,6 +354,14 @@ window-rule {
     default-window-height { fixed 920; }
 }
 
+// Disable compositor blur behind the Noctalia bar only.
+layer-rule {
+    match namespace="^noctalia-bar-"
+    background-effect {
+        blur false
+    }
+}
+
 debug {
     // Allows notification actions and window activation from Noctalia.
     honor-xdg-activation-with-invalid-serial
@@ -370,8 +388,11 @@ binds {
 
     // Core Noctalia binds
     Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
-    Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+Shift+S { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
+
+    // Jump to scratch workspace; press again to return (needs workspace-auto-back-and-forth).
+    Mod+S hotkey-overlay-title="Toggle Scratch Workspace" { focus-workspace "scratch"; }
     // Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
     Alt+Tab { toggle-overview; }
 
@@ -467,8 +488,8 @@ binds {
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
-    Mod+U              { focus-workspace-down; }
-    Mod+I              { focus-workspace-up; }
+    Mod+I              { focus-workspace-down; }
+    Mod+U              { focus-workspace-up; }
     Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
     Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
     Mod+Ctrl+U         { move-column-to-workspace-down; }
@@ -515,32 +536,26 @@ binds {
     // Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
     // Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
 
-    // You can refer to workspaces by index. However, keep in mind that
-    // niri is a dynamic workspace system, so these commands are kind of
-    // "best effort". Trying to refer to a workspace index bigger than
-    // the current workspace count will instead refer to the bottommost
-    // (empty) workspace.
-    //
-    // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
-    // will all refer to the 3rd workspace.
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+6 { focus-workspace 6; }
-    Mod+7 { focus-workspace 7; }
-    Mod+8 { focus-workspace 8; }
-    Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    // Number keys skip index 1 (the persistent "scratch" workspace).
+    // Mod+1 focuses the first normal workspace; use Mod+S for scratch.
+    Mod+1 { focus-workspace 2; }
+    Mod+2 { focus-workspace 3; }
+    Mod+3 { focus-workspace 4; }
+    Mod+4 { focus-workspace 5; }
+    Mod+5 { focus-workspace 6; }
+    Mod+6 { focus-workspace 7; }
+    Mod+7 { focus-workspace 8; }
+    Mod+8 { focus-workspace 9; }
+    Mod+9 { focus-workspace 10; }
+    Mod+Ctrl+1 { move-column-to-workspace 2; }
+    Mod+Ctrl+2 { move-column-to-workspace 3; }
+    Mod+Ctrl+3 { move-column-to-workspace 4; }
+    Mod+Ctrl+4 { move-column-to-workspace 5; }
+    Mod+Ctrl+5 { move-column-to-workspace 6; }
+    Mod+Ctrl+6 { move-column-to-workspace 7; }
+    Mod+Ctrl+7 { move-column-to-workspace 8; }
+    Mod+Ctrl+8 { move-column-to-workspace 9; }
+    Mod+Ctrl+9 { move-column-to-workspace 10; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }

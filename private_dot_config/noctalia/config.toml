@@ -1,15 +1,22 @@
+[audio]
+enable_sounds = true
+sound_volume = 0.29999999329447746
+
 [bar]
 order = [ "default" ]
 
     [bar.default]
+    background_opacity = 0.0
     border = "primary"
-    capsule_thickness = 0.52999999187886715
-    center = [ "active_window", "control-center" ]
+    capsule = true
+    capsule_thickness = 0.54999999143183231
+    center = [ "group:g4" ]
     end = [ "tray", "group:g1", "group:g2", "group:g3" ]
-    margin_ends = 20
-    padding = 15
+    margin_ends = 10
+    padding = 0
+    scale = 0.90000000596046448
     shadow = false
-    start = [ "wallpaper", "clock", "date", "media", "workspaces" ]
+    start = [ "media", "workspaces" ]
     widget_spacing = 8
 
         [[bar.default.capsule_group]]
@@ -41,9 +48,25 @@ order = [ "default" ]
         fill = "tertiary"
         foreground = "on_tertiary"
         id = "g3"
-        members = [ "clipboard", "notifications", "session" ]
+        members = [ "clipboard", "notifications", "control-center", "session" ]
         opacity = 1.0
         padding = 6.0
+
+        [[bar.default.capsule_group]]
+        accordion = false
+        accordion_direction = "end"
+        border = ""
+        enabled = true
+        fill = "secondary"
+        foreground = "on_secondary"
+        id = "g4"
+        members = [ "wallpaper", "clock", "date" ]
+        opacity = 1.0
+        padding = 8.0
+        widget_spacing = 10
+
+[control_center.calendar]
+show_events_card = false
 
 [lockscreen_widgets]
 enabled = false
@@ -82,12 +105,18 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
         show_unlock_hint = true
         show_weather = true
 
+[nightlight]
+enabled = true
+
+[plugins]
+enabled = [ "weinguyen/procmon" ]
+
 [shell]
 lang = "en"
 
 [theme]
 builtin = "Nord"
-community_palette = "GitHub Dark"
+community_palette = "Flexoki"
 mode = "dark"
 source = "community"
 wallpaper_scheme = "m3-content"
@@ -96,10 +125,13 @@ wallpaper_scheme = "m3-content"
 directory = "/home/mmk/pictures/wallpapers"
 
     [wallpaper.default]
-    path = "/home/mmk/pictures/wallpapers/wallpaper3.png"
+    path = "/home/mmk/pictures/wallpapers/wallpaper1.png"
 
     [wallpaper.last]
-    path = "/home/mmk/pictures/wallpapers/wallpaper3.png"
+    path = "/home/mmk/pictures/wallpapers/wallpaper1.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/mmk/pictures/wallpapers/wallpaper3.png"
+    path = "/home/mmk/pictures/wallpapers/wallpaper1.png"
+
+[widget.session]
+enabled = false
