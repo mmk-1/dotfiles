@@ -263,13 +263,6 @@ layout {
 
 spawn-at-startup "noctalia"
 
-// Persistent named workspace for scratch tools (stays even when empty).
-workspace "scratch" {
-    layout {
-        default-column-width { proportion 1.0; }
-    }
-}
-
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
@@ -368,20 +361,6 @@ debug {
 }
 
 binds {
-    // Keys consist of modifiers separated by + signs, followed by an XKB key name
-    // in the end. To find an XKB name for a particular key, you may use a program
-    // like wev.
-    //
-    // "Mod" is a special modifier equal to Super when running on a TTY, and to Alt
-    // when running as a winit window.
-    //
-    // Most actions that you can bind here can also be invoked programmatically with
-    // `niri msg action do-something`.
-
-    // Mod-Shift-/, which is usually the same as Mod-?,
-    // shows a list of important hotkeys.
-    Mod+Shift+Slash { show-hotkey-overlay; }
-
     // Suggested binds for running programs: terminal, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: Kitty" { spawn "kitty"; }
     Super+Alt+L allow-when-locked=true hotkey-overlay-title="Lock the Screen: Noctalia" { spawn-sh "noctalia msg session lock"; }
@@ -390,16 +369,7 @@ binds {
     Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+Shift+S { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
-
-    // Jump to scratch workspace; press again to return (needs workspace-auto-back-and-forth).
-    Mod+S hotkey-overlay-title="Toggle Scratch Workspace" { focus-workspace "scratch"; }
-    // Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
-    Alt+Tab { toggle-overview; }
-
-    // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
-    // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
-    // For example, this is a standard bind to toggle the screen reader (orca).
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+    Super+V { spawn-sh "noctalia msg panel-toggle clipboard"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
@@ -488,8 +458,8 @@ binds {
 
     Mod+Page_Down      { focus-workspace-down; }
     Mod+Page_Up        { focus-workspace-up; }
-    Mod+I              { focus-workspace-down; }
-    Mod+U              { focus-workspace-up; }
+    Mod+N              { focus-workspace-down; }
+    Mod+P              { focus-workspace-up; }
     Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
     Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
     Mod+Ctrl+U         { move-column-to-workspace-down; }
@@ -536,26 +506,24 @@ binds {
     // Mod+TouchpadScrollDown { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02+"; }
     // Mod+TouchpadScrollUp   { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.02-"; }
 
-    // Number keys skip index 1 (the persistent "scratch" workspace).
-    // Mod+1 focuses the first normal workspace; use Mod+S for scratch.
-    Mod+1 { focus-workspace 2; }
-    Mod+2 { focus-workspace 3; }
-    Mod+3 { focus-workspace 4; }
-    Mod+4 { focus-workspace 5; }
-    Mod+5 { focus-workspace 6; }
-    Mod+6 { focus-workspace 7; }
-    Mod+7 { focus-workspace 8; }
-    Mod+8 { focus-workspace 9; }
-    Mod+9 { focus-workspace 10; }
-    Mod+Ctrl+1 { move-column-to-workspace 2; }
-    Mod+Ctrl+2 { move-column-to-workspace 3; }
-    Mod+Ctrl+3 { move-column-to-workspace 4; }
-    Mod+Ctrl+4 { move-column-to-workspace 5; }
-    Mod+Ctrl+5 { move-column-to-workspace 6; }
-    Mod+Ctrl+6 { move-column-to-workspace 7; }
-    Mod+Ctrl+7 { move-column-to-workspace 8; }
-    Mod+Ctrl+8 { move-column-to-workspace 9; }
-    Mod+Ctrl+9 { move-column-to-workspace 10; }
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+Ctrl+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+8 { move-column-to-workspace 8; }
+    Mod+Ctrl+9 { move-column-to-workspace 9; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -617,8 +585,8 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+G       { toggle-window-floating; }
+    Mod+Shift+G { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,

@@ -7,6 +7,7 @@ Personal Arch/Hyprland dotfiles (chezmoi).
 - [Packages](#packages)
 - [Terminal & shell setup](#terminal--shell-setup)
 - [Waybar setup](#waybar-setup)
+- [Noctalia Greeter setup](#noctalia-greeter-setup)
 
 ---
 
@@ -106,4 +107,50 @@ chezmoi apply ~/.config/waybar
 waybar
 # or: killall waybar; waybar
 ```
+
+---
+
+## Noctalia Greeter setup
+
+Graphical login via [greetd](https://github.com/kennylevinsen/greetd) + [Noctalia Greeter](https://docs.noctalia.dev/greeter/) — replaces the TTY login and `niri-session` hand-off.
+
+Order: packages → greetd → PAM → dotfiles → sync appearance.
+
+```bash
+# 1. Packages (greetd is pulled in by noctalia-greeter)
+yay -S noctalia-greeter gnome-keyring
+
+# 2. Greetd — prints a setup block; paste the whole thing into the terminal and run it
+sudo noctalia-greeter-print-greetd-config
+
+# 3. Keyring unlock at greeter login (same idea as /etc/pam.d/login)
+sudo nano /etc/pam.d/greetd
+```
+
+Add these two lines to `/etc/pam.d/greetd` (keep the rest of the file as-is):
+
+```
+auth       optional     pam_gnome_keyring.so
+session    optional     pam_gnome_keyring.so auto_start
+```
+
+Put the `auth` line after `auth include system-local-login`, and the `session` lines after `session include system-local-login` (before `session required pam_systemd.so`).
+
+```bash
+# 4. Apply dotfiles
+chezmoi apply ~/.config/niri
+chezmoi apply ~/.config/noctalia
+
+# 5. Reboot, or log out — greeter should be on VT1 instead of the text login
+
+# 6. Match greeter wallpaper / theme to the desktop (after logging in)
+#    Noctalia Settings → Security → Noctalia Greeter → Sync Now
+#    Optional: enable Auto-Sync Greeter in the same panel
+```
+
+To preview greeter changes without a full reboot, log out from the session (or `sudo systemctl restart greetd` from another TTY).
+
+Optional: `accountsservice` for user avatars on the login screen.
+
+Greeter appearance (`/var/lib/noctalia-greeter/`) is not in chezmoi — it is written by Sync Now from Noctalia. See the [Noctalia Greeter docs](https://docs.noctalia.dev/greeter/) for configuration, troubleshooting, and keyboard shortcuts (e.g. F3 session picker, F7 color scheme).
 

@@ -114,6 +114,21 @@ enabled = [ "weinguyen/procmon" ]
 [shell]
 lang = "en"
 
+[shell.panel]
+transparency_mode = "solid"
+control_center_placement = "floating"
+wallpaper_placement = "floating"
+session_placement = "floating"
+clipboard_placement = "floating"
+open_near_click_control_center = true
+open_near_click_wallpaper = true
+open_near_click_session = true
+open_near_click_clipboard = true
+
+[keybinds]
+up = [ "up", "ctrl+p" ]
+down = [ "down", "ctrl+n" ]
+
 [theme]
 builtin = "Nord"
 community_palette = "Flexoki"
