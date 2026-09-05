@@ -80,20 +80,7 @@ plug "zsh-users/zsh-syntax-highlighting"
 command -v starship >/dev/null && eval "$(starship init zsh)"
 command -v direnv >/dev/null && eval "$(direnv hook zsh)"
 command -v fzf >/dev/null && source <(fzf --zsh)
-
-# Lazy-load NVM to keep startup instantaneous
-export NVM_DIR="$HOME/.config/nvm"
-if [[ -s "$NVM_DIR/nvm.sh" ]]; then
-  nvm() {
-    unset -f nvm node npm npx
-    \. "$NVM_DIR/nvm.sh"
-    [[ -s "$NVM_DIR/bash_completion" ]] && \. "$NVM_DIR/bash_completion"
-    nvm "$@"
-  }
-  node() { nvm use default &>/dev/null; node "$@"; }
-  npm()  { nvm use default &>/dev/null; npm "$@"; }
-  npx()  { nvm use default &>/dev/null; npx "$@"; }
-fi
+command -v fnm >/dev/null && eval "$(fnm env --use-on-cd --shell zsh)"
 
 # -----------------------------
 # Aliases
@@ -103,3 +90,4 @@ alias v='nvim'
 alias lzg='lazygit'
 alias ssh='TERM=xterm-256color ssh'
 alias nvim2='NVIM_APPNAME=nvim-alt nvim'
+
