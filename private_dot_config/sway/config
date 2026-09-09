@@ -1,0 +1,143 @@
+# -----------------------------
+# Desktop environment
+# -----------------------------
+
+include /etc/sway/config.d/*
+
+# -----------------------------
+# Startup applications
+# -----------------------------
+
+exec noctalia
+exec /usr/lib/xdg-desktop-portal-wlr
+
+# Optional polkit popup (install polkit-gnome if needed)
+# exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# -----------------------------
+# Appearance and borders
+# -----------------------------
+
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders smart
+gaps inner 8
+gaps outer 8
+font pango:JetBrainsMono Nerd Font 10
+
+# border background text indicator child-border
+client.focused          #7fc8ff #1e1e2e #ffffff #7fc8ff #7fc8ff
+client.unfocused        #505050 #1e1e2e #888888 #292d2e #505050
+client.focused_inactive #505050 #1e1e2e #888888 #292d2e #505050
+client.urgent            #9b0000 #900000 #ffffff #900000 #9b0000
+
+# -----------------------------
+# Input
+# -----------------------------
+
+input type:keyboard {
+    xkb_options ctrl:swap_lalt_lctl
+}
+input type:touchpad {
+    tap enabled
+    natural_scroll disabled
+}
+
+set $mod Mod4
+set $term kitty
+set $scratchpad_size resize set 1200 px 800 px
+
+# -----------------------------
+# Noctalia controls
+# -----------------------------
+
+bindsym $mod+t exec $term
+bindsym $mod+Alt+l exec noctalia msg session lock
+bindsym $mod+space exec noctalia msg panel-toggle launcher
+bindsym $mod+c exec noctalia msg panel-toggle clipboard
+bindsym $mod+Shift+c exec noctalia msg panel-toggle control-center
+bindsym $mod+comma exec noctalia msg settings-toggle
+bindsym $mod+b exec noctalia msg bar-toggle default
+
+# -----------------------------
+# Media and brightness
+# -----------------------------
+
+bindsym XF86AudioRaiseVolume exec noctalia msg volume-up
+bindsym XF86AudioLowerVolume exec noctalia msg volume-down
+bindsym XF86AudioMute exec noctalia msg volume-mute
+bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86MonBrightnessUp exec noctalia msg brightness-up
+bindsym XF86MonBrightnessDown exec noctalia msg brightness-down
+
+# -----------------------------
+# Workspaces and window movement
+# -----------------------------
+
+default_orientation auto
+workspace_auto_back_and_forth yes
+
+bindsym $mod+Shift+e reload
+bindsym $mod+q kill
+
+# Focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# Move the focused container
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+Shift+1 floating disable, move --no-auto-back-and-forth container to workspace number 1
+bindsym $mod+Shift+2 floating disable, move --no-auto-back-and-forth container to workspace number 2
+bindsym $mod+Shift+3 floating disable, move --no-auto-back-and-forth container to workspace number 3
+bindsym $mod+Shift+4 floating disable, move --no-auto-back-and-forth container to workspace number 4
+bindsym $mod+Shift+5 floating disable, move --no-auto-back-and-forth container to workspace number 5
+
+# -----------------------------
+# Layouts
+# -----------------------------
+
+bindsym $mod+s splitv
+bindsym $mod+v splith
+bindsym $mod+w layout tabbed
+bindsym $mod+Shift+w layout stacking
+bindsym $mod+e layout toggle split
+bindsym $mod+f gaps inner current toggle 8, gaps outer current toggle 8
+bindsym $mod+Shift+f fullscreen toggle
+bindsym $mod+g floating toggle
+
+# -----------------------------
+# Scratchpad
+# -----------------------------
+
+# Minus shows/cycles scratchpads; Shift+minus sends the focused window there.
+bindsym $mod+minus scratchpad show, $scratchpad_size, move position center
+bindsym $mod+Shift+minus floating enable, border pixel 2, $scratchpad_size, move position center, move scratchpad
+
+# -----------------------------
+# Gestures
+# -----------------------------
+
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next
+
+# -----------------------------
+# Application and window rules
+# -----------------------------
+
+for_window [app_id="dev.noctalia.Noctalia"] floating enable

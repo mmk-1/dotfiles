@@ -9,7 +9,7 @@
 input {
     keyboard {
         xkb {
-            options "ctrl:nocaps"
+            options "ctrl:swap_lalt_lctl"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -26,7 +26,7 @@ input {
         // dwtp
         // drag false
         // drag-lock
-        natural-scroll
+        // Natural scrolling disabled to match conventional KDE-style scrolling.
         // accel-speed 0.2
         // accel-profile "flat"
         // scroll-method "two-finger"
