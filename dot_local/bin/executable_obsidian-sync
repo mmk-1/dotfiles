@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 LOCAL_PATH="$HOME/obsidian"
 REMOTE_PATH="koofr:obsidian"
 EXCLUDE_FILE="$HOME/.config/rclone/obsidian-ignore.txt"
