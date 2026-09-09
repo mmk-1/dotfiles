@@ -1,0 +1,6 @@
+{{- if .nvimRepo }}
+[".config/nvim"]
+    type = "git-repo"
+    url = {{ .nvimRepo | quote }}
+    refreshPeriod = "0"
+{{- end }}
