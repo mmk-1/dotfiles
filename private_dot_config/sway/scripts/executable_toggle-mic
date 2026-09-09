@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+source='@DEFAULT_AUDIO_SOURCE@'
+control="name='Capture Switch'"
+
+wpctl set-mute "$source" toggle
+
+if wpctl get-volume "$source" | grep -Fq '[MUTED]'; then
+    # Kernel interprets off as microphone muted -> F4 LED on.
+    amixer -q -c 1 cset "$control" off,off
+else
+    # Kernel interprets on as microphone unmuted -> F4 LED off.
+    amixer -q -c 1 cset "$control" on,on
+fi

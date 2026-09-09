@@ -66,7 +66,8 @@ bindsym $mod+b exec noctalia msg bar-toggle default
 bindsym XF86AudioRaiseVolume exec noctalia msg volume-up
 bindsym XF86AudioLowerVolume exec noctalia msg volume-down
 bindsym XF86AudioMute exec noctalia msg volume-mute
-bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+#bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindsym XF86AudioMicMute exec ~/.config/sway/scripts/toggle-mic
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioStop exec playerctl stop
 bindsym XF86AudioPrev exec playerctl previous
