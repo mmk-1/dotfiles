@@ -17,10 +17,10 @@ order = [ "default" ]
     padding = 0
     position = "bottom"
     radius = 0
-    scale = 0.90000000596046448
+    scale = 1.0000000074505806
     shadow = false
     start = [ "spacer_2", "media", "workspaces" ]
-    thickness = 35
+    thickness = 40
     widget_spacing = 8
 
         [[bar.default.capsule_group]]
@@ -142,6 +142,7 @@ widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@eDP-1" ]
 
 [nightlight]
 enabled = true
+force = true
 
 [plugins]
 enabled = [ "weinguyen/procmon" ]
@@ -163,7 +164,7 @@ polkit_agent = true
 
 [theme]
 builtin = "Nord"
-community_palette = "Flexoki"
+community_palette = "Doomed"
 mode = "dark"
 source = "community"
 wallpaper_scheme = "m3-content"
@@ -184,6 +185,8 @@ directory = "/home/mmk/pictures/wallpapers"
 capsule = true
 capsule_border = "outline"
 capsule_padding = 10
+hide_when_no_media = true
+title_scroll = "on_hover"
 
 [widget.notifications]
 capsule_fill = "on_secondary"
@@ -199,6 +202,14 @@ type = "spacer"
 [widget.spacer_3]
 length = 10
 type = "spacer"
+
+[widget.tray]
+capsule = true
+capsule_fill = "tertiary"
+capsule_opacity = 0.66000000000000003
+capsule_padding = 5
+capsule_radius = 3
+scale = 1.3500000000000001
 
 [widget.workspaces]
 capsule = true
