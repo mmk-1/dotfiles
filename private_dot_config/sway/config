@@ -9,6 +9,10 @@ include /etc/sway/config.d/*
 # -----------------------------
 
 exec noctalia
+exec swayidle -w \
+  timeout 300 'noctalia msg session lock' \
+  timeout 360 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+  before-sleep 'noctalia msg session lock'
 exec /usr/lib/xdg-desktop-portal-wlr
 
 # Optional polkit popup (install polkit-gnome if needed)
