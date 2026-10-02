@@ -143,6 +143,7 @@ widget_order = [ "lockscreen-login-box@WL-1", "lockscreen-login-box@eDP-1" ]
 [nightlight]
 enabled = true
 force = true
+temperature_night = 3300
 
 [plugins]
 enabled = [ "weinguyen/procmon" ]
