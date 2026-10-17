@@ -1,0 +1,7 @@
+alias ls='ls --color=auto'
+alias v='nvim'
+alias lzg='lazygit'
+alias ssh='TERM=xterm-256color ssh'
+alias nvim2='NVIM_APPNAME=nvim-alt nvim'
+alias gits='git status'
+alias gitp='git push'
